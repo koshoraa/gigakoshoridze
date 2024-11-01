@@ -1,0 +1,9 @@
+<!-- src/app/app.component.html -->
+<h1>Array from child component</h1>
+<app-user (childUsersEmitter)="handleChildUsers($event)" [users]="parentUsers"></app-user>
+
+<ul>
+  <li *ngFor="let user of childUsers">
+    {{ user.firstname }} {{ user.lastname }} ({{ user.DateOfBirth }}) - {{ user.PhoneNumber }} - {{ user.email }}
+  </li>
+</ul>

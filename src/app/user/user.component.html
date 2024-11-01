@@ -1,0 +1,69 @@
+<!-- src/app/user/user.component.html -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+<div class="container mt-4">
+  <form [formGroup]="userForm" (ngSubmit)="addUser()">
+    <div class="form-group">
+      <label for="Id">ID</label>
+      <input type="number" id="Id" class="form-control" formControlName="Id">
+      <div *ngIf="userForm.get('Id')!.invalid && userForm.get('Id')!.touched" class="text-danger">
+        ID is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="firstname">First Name</label>
+      <input type="text" id="firstname" class="form-control" formControlName="firstname">
+      <div *ngIf="userForm.get('firstname')!.invalid && userForm.get('firstname')!.touched" class="text-danger">
+        <div *ngIf="userForm.get('firstname')!.errors?.['required']">First Name is required.</div>
+        <div *ngIf="userForm.get('firstname')!.errors?.['minlength']">First Name must be at least 3 characters long.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="lastname">Last Name</label>
+      <input type="text" id="lastname" class="form-control" formControlName="lastname">
+      <div *ngIf="userForm.get('lastname')!.invalid && userForm.get('lastname')!.touched" class="text-danger">
+        <div *ngIf="userForm.get('lastname')!.errors?.['required']">Last Name is required.</div>
+        <div *ngIf="userForm.get('lastname')!.errors?.['minlength']">Last Name must be at least 3 characters long.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="DateOfBirth">Date of Birth</label>
+      <input type="date" id="DateOfBirth" class="form-control" formControlName="DateOfBirth">
+      <div *ngIf="userForm.get('DateOfBirth')!.invalid && userForm.get('DateOfBirth')!.touched" class="text-danger">
+        Date of Birth is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="PhoneNumber">Phone Number</label>
+      <input type="text" id="PhoneNumber" class="form-control" formControlName="PhoneNumber">
+      <div *ngIf="userForm.get('PhoneNumber')!.invalid && userForm.get('PhoneNumber')!.touched" class="text-danger">
+        <div *ngIf="userForm.get('PhoneNumber')!.errors?.['required']">Phone Number is required.</div>
+        <div *ngIf="userForm.get('PhoneNumber')!.errors?.['minlength']">Phone Number must be at least 9 characters long.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" class="form-control" formControlName="email">
+      <div *ngIf="userForm.get('email')!.invalid && userForm.get('email')!.touched" class="text-danger">
+        <div *ngIf="userForm.get('email')!.errors?.['required']">Email is required.</div>
+        <div *ngIf="userForm.get('email')!.errors?.['minlength']">Email must be at least 8 characters long.</div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">Add User</button>
+  </form>
+
+  <button class="btn btn-secondary mt-3" (click)="emitChildUsers()">Emit Child Users</button>
+
+  <h1 class="mt-4">Array from parent component</h1>
+  <ul>
+    <li *ngFor="let user of users">
+      {{ user.firstname }} {{ user.lastname }} - {{ user.DateOfBirth }} - {{ user.PhoneNumber }} - {{ user.email }}
+    </li>
+  </ul>
+</div>
